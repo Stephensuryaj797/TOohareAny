@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: black; /* Set the background color to black */
+            color: white; /* Set the font color to white */
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            color: white; /* Set label text color to white */
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Make the input boxes expand to full width */
+            padding: 10px; /* Add some padding for better appearance */
+            border: none; /* Remove the default input border */
+            background-color: white; /* Set input box background color to white */
+            color: black; /* Set input text color to black */
+            margin-bottom: 10px; /* Add spacing between input boxes */
+        }
+        input[type="submit"] {
+            background-color: #808080; /* Set button background color to ash color */
+            color: white; /* Set button text color to white */
+            padding: 10px 20px; /* Add padding to the button */
+            border: none; /* Remove the default button border */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+        input[type="submit"]:hover {
+            background-color: #A9A9A9; /* Change button color on hover */
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validatePassword()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <p id="passwordError" style="color: red;"></p>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var passwordError = document.getElementById("passwordError");
+            
+            // Check if the password contains at least one uppercase letter
+            if (!/[A-Z]/.test(password)) {
+                passwordError.textContent = "Password must contain at least one uppercase letter.";
+                return false;
+            }
+            
+            // Check if the password contains at least one digit (number)
+            if (!/\d/.test(password)) {
+                passwordError.textContent = "Password must contain at least one number.";
+                return false;
+            }
+            
+            // Check if the password contains at least one special character
+            if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password)) {
+                passwordError.textContent = "Password must contain at least one special character.";
+                return false;
+            }
+            
+            // Check if the password has a minimum length of 8 characters
+            if (password.length < 8) {
+                passwordError.textContent = "Password must be at least 8 characters long.";
+                return false;
+            }
+            
+            // Clear any previous error messages
+            passwordError.textContent = "";
+            
+            // If all checks pass, the password is valid
+            return true;
+        }
+    </script>
+</body>
+</html>

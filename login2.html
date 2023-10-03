@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validatePassword()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <p id="passwordError" style="color: red;"></p>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var passwordError = document.getElementById("passwordError");
+            
+            // Check if the password contains at least one uppercase letter
+            if (!/[A-Z]/.test(password)) {
+                passwordError.textContent = "Password must contain at least one uppercase letter.";
+                return false;
+            }
+            
+            // Check if the password contains at least one digit (number)
+            if (!/\d/.test(password)) {
+                passwordError.textContent = "Password must contain at least one number.";
+                return false;
+            }
+            
+            // Check if the password contains at least one special character
+            if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password)) {
+                passwordError.textContent = "Password must contain at least one special character.";
+                return false;
+            }
+            
+            // Check if the password has a minimum length of 8 characters
+            if (password.length < 8) {
+                passwordError.textContent = "Password must be at least 8 characters long.";
+                return false;
+            }
+            
+            // Clear any previous error messages
+            passwordError.textContent = "";
+            
+            // If all checks pass, the password is valid
+            return true;
+        }
+    </script>
+</body>
+</html>
